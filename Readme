@@ -1,0 +1,76 @@
+# Lumina AI Editor
+
+Lumina is a desktop-based code editor built with Electron, React, and TypeScript. It integrates an offline code editor with a local AI assistant powered by Ollama, ensuring that all code analysis and inference are executed entirely on the host machine to maintain complete data privacy.
+
+---
+
+## User & Tester Guide
+
+### Application Overview
+Lumina is a desktop application that integrates:
+* **Code Editor**: Powered by Monaco Editor (the same engine behind VS Code) with syntax highlighting.
+* **Local AI Assistant**: Powered by Ollama running Llama 3.2 locally on your machine.
+* **Fusion Search**: An optional search toggle that enriches local AI responses with live, sanitized web search results (via DuckDuckGo) without exposing your source code.
+
+---
+
+### Installation
+1. Download `LuminaInstaller.exe` from the **Releases** section of this repository.
+2. Double-click the installer executable. It will install the application and create a shortcut on your desktop and Start Menu.
+3. Launch the application.
+
+---
+
+### First-Launch Initialization
+On the first launch of the application:
+1. Lumina will automatically download and install the **Ollama AI engine** (~200 MB one-time download) in the background.
+2. Once initialization completes, the local AI model will start.
+3. Click **Open Folder** to select your project and begin coding.
+
+---
+
+### Interface Walkthrough
+* **Left Panel (File Tree)**: Browse and open your project files.
+* **Center Panel (Editor)**: View and edit code with full syntax highlighting.
+* **Right Panel (AI Chat)**: Query the local AI assistant about your code (e.g., *"Explain this function"* or *"Refactor this code"*).
+  * **Fusion Search**: Toggle the checkbox to allow the AI to search the web for external documentation, libraries, or APIs to augment its responses.
+* **Review Panel (History)**: Browse previous prompts and replies.
+
+---
+
+### System Requirements
+* **Operating System**: Windows 10 or 11 (64-bit).
+* **RAM**: 4 GB minimum (8 GB or more recommended for optimal response times).
+* **Storage**: ~2 GB of free disk space (to store the local AI model).
+* **Network**: Required only for the initial setup download (one-time) and for performing Fusion web searches.
+
+---
+
+### Privacy & Security
+* **No Cloud Uploads**: Your source code never leaves your computer. All AI inference is run 100% locally.
+* **Query Sanitization**: When **Fusion Search** is active, Lumina automatically strips local pathnames and code structures from the search query before fetching web results.
+
+---
+
+## Developer Guide
+
+### Repository Structure
+* **`Lumina/`**: Root folder of the application source code (Electron, React, TypeScript).
+* **`Lumina/out/make/`**: Directory where the built installers are generated (ignored by Git).
+
+### Local Setup
+1. Navigate to the application directory and install dependencies:
+   ```bash
+   cd Lumina
+   npm install
+   ```
+2. Start the application in development mode:
+   ```bash
+   npm start
+   ```
+
+### Build and Package Commands
+Run these commands inside the `Lumina/` folder:
+* `npm run type-check`: Performs strict TypeScript validation.
+* `npm run package`: Bundles application files without compiling an installer.
+* `npm run make`: Generates the production-ready Windows Squirrel `.exe` installer.
